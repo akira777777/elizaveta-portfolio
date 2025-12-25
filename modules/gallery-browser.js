@@ -95,7 +95,7 @@
 
     initLazyLoading() {
       // Используем Intersection Observer для ленивой загрузки
-      if ('IntersectionObserver' in globalThis) {
+      if (typeof globalThis.IntersectionObserver !== 'undefined') {
         const imageObserver = new IntersectionObserver(
           (entries, observer) => {
             entries.forEach(entry => {
@@ -106,12 +106,12 @@
 
                 if (src) {
                   img.src = src;
-                  delete img.dataset.src;
+                  img.removeAttribute('data-src');
                 }
 
                 if (srcset) {
                   img.srcset = srcset;
-                  delete img.dataset.srcset;
+                  img.removeAttribute('data-srcset');
                 }
 
                 img.classList.add('loaded');
@@ -132,7 +132,7 @@
         // Fallback для старых браузеров
         document.querySelectorAll('img[data-src]').forEach(img => {
           img.src = img.dataset.src;
-          delete img.dataset.src;
+          img.removeAttribute('data-src');
         });
       }
     }
@@ -148,7 +148,7 @@
           // Проверяем, не кликнули ли на кнопку или ссылку
           if (e.target.closest('a, button')) return;
 
-          const imgSrc = image.src || image.getAttribute('src');
+          const imgSrc = image.src || image.dataset.src;
           if (imgSrc) {
             this.openLightbox(imgSrc, image.alt || 'Portfolio image');
           }
@@ -232,7 +232,7 @@
       const close = () => {
         lightbox.style.animation = 'fadeOut 0.3s ease';
         setTimeout(() => {
-          document.body.removeChild(lightbox);
+          lightbox.remove();
           document.body.style.overflow = '';
         }, 300);
       };
@@ -289,5 +289,5 @@
   }
 
   // Экспортируем класс в глобальную область
-  window.PortfolioGallery = PortfolioGallery;
+  globalThis.PortfolioGallery = PortfolioGallery;
 })();

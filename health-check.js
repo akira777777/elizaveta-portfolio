@@ -32,7 +32,7 @@ setTimeout(() => {
         position: fixed;
         top: 10px;
         right: 10px;
-        padding: 10px 15px;2a483fd5-8efa-40f0-a289-f908f332e8c4
+        padding: 10px 15px;
         border-radius: 5px;
         color: white;
         font-family: monospace;

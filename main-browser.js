@@ -8,7 +8,7 @@
 
   // Конфигурация приложения
   const APP_CONFIG = {
-    version: '2.1.0',
+    version: '2.2.0',
     debug: false,
     modules: {
       core: true,
@@ -16,6 +16,61 @@
       gallery: true,
       forms: true,
       animations: false // Отключаем пока не нужны
+    }
+  };
+
+  // Утилиты для оптимизации производительности
+  const Utils = {
+    // Debounce: откладывает выполнение функции до окончания серии вызовов
+    debounce(func, wait) {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func.apply(this, args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      };
+    },
+
+    // Throttle: ограничивает частоту вызовов функции
+    throttle(func, limit) {
+      let inThrottle;
+      return function executedFunction(...args) {
+        if (!inThrottle) {
+          func.apply(this, args);
+          inThrottle = true;
+          setTimeout(() => {
+            inThrottle = false;
+          }, limit);
+        }
+      };
+    },
+
+    // Проверка поддержки браузером
+    supports(feature) {
+      const features = {
+        intersectionObserver: 'IntersectionObserver' in window,
+        requestIdleCallback: 'requestIdleCallback' in window,
+        passiveEvents: (() => {
+          let supportsPassive = false;
+          try {
+            const opts = Object.defineProperty({}, 'passive', {
+              get() {
+                supportsPassive = true;
+                return false;
+              }
+            });
+            window.addEventListener('test', null, opts);
+            window.removeEventListener('test', null, opts);
+          } catch (e) {
+            // ignore
+          }
+          return supportsPassive;
+        })()
+      };
+      return features[feature] || false;
     }
   };
 
@@ -494,8 +549,10 @@
       const scrollBtn =
         backToTopBtn || document.querySelector('.scroll-to-top') || this.createScrollToTopBtn();
 
-      window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 300) {
+      // Оптимизируем scroll событие с throttle
+      const handleScroll = Utils.throttle(() => {
+        const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+        if (scrollY > 300) {
           scrollBtn.classList.add('visible');
           if (scrollBtn.style) {
             scrollBtn.style.opacity = '1';
@@ -508,7 +565,13 @@
             scrollBtn.style.visibility = 'hidden';
           }
         }
-      });
+      }, 100);
+
+      // Используем passive listener для лучшей производительности
+      const scrollOptions = Utils.supports('passiveEvents')
+        ? { passive: true }
+        : false;
+      window.addEventListener('scroll', handleScroll, scrollOptions);
 
       scrollBtn.addEventListener('click', () => {
         window.scrollTo({
@@ -553,11 +616,18 @@
 
       if (!scrollProgress || !scrollProgressBar) return;
 
-      window.addEventListener('scroll', () => {
-        const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      // Оптимизируем scroll событие с throttle для плавности
+      const updateProgress = Utils.throttle(() => {
+        const windowHeight =
+          document.documentElement.scrollHeight - document.documentElement.clientHeight;
         const scrolled = (window.pageYOffset / windowHeight) * 100;
-        scrollProgressBar.style.width = `${scrolled}%`;
-      });
+        scrollProgressBar.style.width = `${Math.min(100, Math.max(0, scrolled))}%`;
+      }, 16); // ~60fps
+
+      const scrollOptions = Utils.supports('passiveEvents')
+        ? { passive: true }
+        : false;
+      window.addEventListener('scroll', updateProgress, scrollOptions);
     }
 
     createScrollToTopBtn() {
@@ -611,29 +681,45 @@
 
       if (!sections.length || !navLinks.length) return;
 
+      // Оптимизируем IntersectionObserver для лучшей производительности
       const observerOptions = {
         rootMargin: '-20% 0px -80% 0px',
-        threshold: 0
+        threshold: [0, 0.1, 0.5, 1] // Несколько порогов для более точного определения
       };
 
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const activeId = entry.target.id;
+      let activeSection = null;
+
+      const observer = new IntersectionObserver(
+        entries => {
+          // Находим секцию с наибольшей видимостью
+          let maxRatio = 0;
+          let mostVisible = null;
+
+          entries.forEach(entry => {
+            if (entry.intersectionRatio > maxRatio) {
+              maxRatio = entry.intersectionRatio;
+              mostVisible = entry.target;
+            }
+          });
+
+          // Обновляем активную ссылку только если изменилась секция
+          if (mostVisible && mostVisible.id !== activeSection) {
+            activeSection = mostVisible.id;
 
             // Убираем активный класс со всех ссылок
             navLinks.forEach(link => link.classList.remove('active'));
 
             // Добавляем активный класс к текущей ссылке
             const activeLink = document.querySelector(
-              `.navbar a[href="#${activeId}"]`
+              `.navbar a[href="#${activeSection}"]`
             );
             if (activeLink) {
               activeLink.classList.add('active');
             }
           }
-        });
-      }, observerOptions);
+        },
+        observerOptions
+      );
 
       sections.forEach(section => observer.observe(section));
     }
@@ -643,15 +729,31 @@
 
       if (!parallaxElements.length) return;
 
-      window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
+      // Оптимизируем parallax с requestAnimationFrame для плавности
+      let ticking = false;
+      const updateParallax = () => {
+        const scrolled = window.pageYOffset || document.documentElement.scrollTop;
 
         parallaxElements.forEach(element => {
-          const speed = element.dataset.parallax || 0.5;
+          const speed = parseFloat(element.dataset.parallax) || 0.5;
           const yPos = -(scrolled * speed);
           element.style.transform = `translateY(${yPos}px)`;
         });
-      });
+
+        ticking = false;
+      };
+
+      const handleScroll = () => {
+        if (!ticking) {
+          window.requestAnimationFrame(updateParallax);
+          ticking = true;
+        }
+      };
+
+      const scrollOptions = Utils.supports('passiveEvents')
+        ? { passive: true }
+        : false;
+      window.addEventListener('scroll', handleScroll, scrollOptions);
     }
 
     initAnimations() {
