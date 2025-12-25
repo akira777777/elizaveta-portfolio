@@ -1,0 +1,12 @@
+# Поддержка современных браузеров (исключаем Internet Explorer)
+# Последние 2 версии современных браузеров
+last 2 Chrome versions
+last 2 Firefox versions  
+last 2 Safari versions
+last 2 Edge versions
+
+# Браузеры с более чем 1% пользователей, но исключаем IE
+> 1%
+not IE 11
+not IE_Mob 11
+not dead

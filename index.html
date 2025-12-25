@@ -1,0 +1,1214 @@
+/* stylelint-disable CssSyntaxError */
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Elizaveta Vakalova - Creative Designer specializing in experimental typography, visual identity, and editorial design.">
+    <meta name="keywords" content="creative design, visual identity, typography, branding, editorial design, portfolio">
+    <meta name="author" content="Elizaveta Vakalova">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Elizaveta Vakalova - Creative Designer">
+    <meta property="og:description"
+        content="Creative designer specializing in experimental typography, visual identity, and editorial design.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://elizaveta-vakalova.com">
+    <meta property="og:image" content="assets/images/elizaveta-profile.jpg">
+
+    <title>Elizaveta Vakalova - Creative Designer & Visual Artist</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/x-icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%236366f1'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='18' font-weight='bold' text-anchor='middle' fill='white'%3EE%3C/text%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" href="favicon.svg">
+
+    <!-- DNS prefetch для внешних ресурсов -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
+    <!-- Preconnect для критических ресурсов -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Preload критических ресурсов -->
+    <link rel="preload" href="styles-minimalist.css" as="style">
+    <link rel="preload" href="main-browser.js" as="script" crossorigin>
+    <link rel="preload" href="assets/images/portfolio/3d-composition.jpg" as="image" fetchpriority="high">
+
+    <!-- Оптимизированная загрузка шрифтов с font-display -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@300;400;500&display=swap"
+        rel="stylesheet"
+        media="print"
+        onload="this.media='all'">
+    <noscript>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@300;400;500&display=swap"
+            rel="stylesheet">
+    </noscript>
+
+    <!-- Critical CSS -->
+    <style>
+        /* Critical above-fold styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            /* Fallback для браузеров без поддержки backdrop-filter */
+            background: rgba(255, 255, 255, 0.9);
+            /* Modern backdrop-filter для размытия */
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e9ecef;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        /* Dark theme navbar */
+        [data-theme="dark"] .navbar {
+            background: rgba(18, 18, 18, 0.95);
+            border-bottom-color: #363636;
+        }
+
+        [data-theme="dark"] .logo {
+            color: #ffffff;
+        }
+
+        [data-theme="dark"] .nav-link {
+            color: #e0e0e0;
+        }
+
+        [data-theme="dark"] .navbar.scrolled {
+            background: rgba(18, 18, 18, 0.98) !important;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 0;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        }
+
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Переносим стили из inline-атрибута */
+        #preloader-details {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            margin-top: 0.5rem;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            overflow-x: hidden;
+        }
+    </style>
+
+    <!-- Font Awesome - асинхронная загрузка -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="styles-minimalist.css" media="print" onload="this.media='all'; this.onload=null;">
+    <noscript>
+        <link rel="stylesheet" href="styles-minimalist.css">
+    </noscript>
+    <link rel="stylesheet" href="css/media-styles.css">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Elizaveta Vakalova",
+      "jobTitle": "Creative Designer & Visual Artist",
+      "description": "Creative designer specializing in experimental typography, visual identity, and editorial design",
+      "url": "https://elizaveta-vakalova.com",
+      "image": "assets/images/elizaveta-profile.jpg",
+      "sameAs": [
+        "https://linkedin.com/in/elizaveta-vakalova",
+        "https://behance.net/elizaveta-vakalova",
+        "https://dribbble.com/elizaveta-vakalova"
+      ],
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Freelance"
+      },
+      "knowsLanguage": ["English", "Russian"]
+    }
+    /* stylelint-disable-next-line CssSyntaxError */
+    </script>
+
+</head>
+
+<body>
+    <!-- Enhanced Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">EV</div>
+            <div class="preloader-progress">
+                <div class="preloader-bar" id="preloader-bar"></div>
+            </div>
+            <div class="preloader-text" id="preloader-text">Загрузка модулей...</div>
+            <div class="preloader-details" id="preloader-details"></div>
+        </div>
+    </div>
+
+    <!-- Performance Badge -->
+    <div id="performance-badge" class="performance-badge">
+        <span id="performance-score">--</span>/100
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress-bar"></div>
+
+    <!-- Skip to main content for accessibility -->
+    <a href="#main" class="skip-to-main">Skip to main content</a>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scroll-progress">
+        <div class="scroll-progress-bar" id="scroll-progress-bar"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span>Elizaveta</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-controls">
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main id="main" role="main">
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <p class="hero-greeting">Hello, I'm</p>
+                    <h1 class="hero-title">
+                        <span class="name">Elizaveta</span>
+                        <span class="surname">Vakalova</span>
+                    </h1>
+                    <p class="hero-subtitle">Creative Designer & Visual Artist</p>
+                    <p class="hero-description">
+                        Creative designer specializing in experimental typography, visual identity, and editorial
+                        design.
+                        I create bold, innovative designs that push boundaries and tell compelling visual stories.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#portfolio" class="btn-primary">View My Work</a>
+                        <a href="#contact" class="btn-secondary">Get in Touch</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="image-frame">
+                        <img src="assets/images/portfolio/3d-composition.jpg" alt="Elizaveta Vakalova - Model Portfolio"
+                            class="profile-photo"
+                            fetchpriority="high"
+                            decoding="async"
+                            width="800"
+                            height="600">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-down">
+            <span class="scroll-text">Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 class="section-title">About</h2>
+                    <p class="about-description">
+                        I'm a creative designer passionate about crafting visual stories that matter.
+                        With over 5 years of experience, I specialize in brand identity, digital design,
+                        and creating meaningful connections between brands and their audiences.
+                    </p>
+                    <p class="about-philosophy">
+                        My approach combines strategic thinking with creative execution, ensuring every
+                        design decision serves both aesthetic and business goals.
+                    </p>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-group">
+                        <div class="stat-item">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-label">Projects</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">5+</span>
+                            <span class="stat-label">Years</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">20+</span>
+                            <span class="stat-label">Clients</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Portfolio</h2>
+                <p class="section-subtitle">Experimental design projects and creative explorations</p>
+            </div>
+
+            <!-- Portfolio Filters -->
+            <div class="portfolio-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="branding">Branding</button>
+                <button class="filter-btn" data-filter="3d">3D Art</button>
+                <button class="filter-btn" data-filter="digital">Digital Art</button>
+                <button class="filter-btn" data-filter="abstract">Abstract</button>
+                <button class="filter-btn" data-filter="typography">Typography</button>
+                <button class="filter-btn" data-filter="print">Print Design</button>
+            </div>
+
+            <div class="portfolio-masonry">
+                <!-- DRICTILE Abstract Poster -->
+                <div class="portfolio-row">
+                    <div class="portfolio-item large" data-category="branding typography">
+                        <div class="portfolio-image large">
+                            <picture>
+                                <source type="image/webp"
+                                    srcset="assets/images/portfolio/freepik__subtle-variation-of-the-previous-electronic-music-__38651-sm.webp 400w, assets/images/portfolio/freepik__subtle-variation-of-the-previous-electronic-music-__38651-md.webp 800w, assets/images/portfolio/freepik__subtle-variation-of-the-previous-electronic-music-__38651.webp 896w"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw">
+                                <img src="assets/images/portfolio/freepik__subtle-variation-of-the-previous-electronic-music-__38651.jpg"
+                                    srcset="assets/images/portfolio/freepik__subtle-variation-of-the-previous-electronic-music-__38651-sm.jpg 400w, assets/images/portfolio/freepik__subtle-variation-of-the-previous-electronic-music-__38651-md.jpg 800w, assets/images/portfolio/freepik__subtle-variation-of-the-previous-electronic-music-__38651.jpg 896w"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw"
+                                    alt="DRICTILE - Abstract Fluid Typography Poster with Metallic Teal and Purple Gradients"
+                                    fetchpriority="high"
+                                    decoding="async"
+                                    width="800"
+                                    height="600">
+                            </picture>
+                    <div class="portfolio-overlay">
+                                <h3>DRICTILE 2.0</h3>
+                                <p>Abstract Typography & Fluid Design</p>
+                                <div class="portfolio-tags">
+                                    <span>Typography</span>
+                                    <span>Abstract</span>
+                                    <span>Poster Design</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3D Purple Spheres -->
+                    <div class="portfolio-item" data-category="digital 3d">
+                        <div class="portfolio-image square">
+                            <picture>
+                                <source type="image/webp"
+                                    srcset="assets/images/portfolio/freepik__upload__96336-sm.webp 400w, assets/images/portfolio/freepik__upload__96336-md.webp 800w, assets/images/portfolio/freepik__upload__96336.webp 1200w"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 30vw">
+                                <img src="assets/images/portfolio/freepik__upload__96336.jpg"
+                                    srcset="assets/images/portfolio/freepik__upload__96336-sm.jpg 400w, assets/images/portfolio/freepik__upload__96336-md.jpg 800w, assets/images/portfolio/freepik__upload__96336.jpg 1200w"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 30vw"
+                                    alt="3D Purple Spheres on Metallic Mesh - Chrome and Purple Digital Art"
+                                    fetchpriority="high"
+                                    decoding="async"
+                                    width="400"
+                                    height="400">
+                            </picture>
+                    <div class="portfolio-overlay">
+                                <h3>Chrome Spheres</h3>
+                                <p>3D Metallic Composition</p>
+                                <div class="portfolio-tags">
+                                    <span>3D Art</span>
+                                    <span>Chrome</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- EFEST Purple Edition -->
+                    <div class="portfolio-item" data-category="branding print">
+                        <div class="portfolio-image square">
+                            <picture>
+                                <source type="image/webp"
+                                    srcset="assets/images/portfolio/freepik__upload__96337-sm.webp 400w, assets/images/portfolio/freepik__upload__96337-md.webp 800w, assets/images/portfolio/freepik__upload__96337.webp 1122w"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 30vw">
+                                <img src="assets/images/portfolio/freepik__upload__96337.jpg"
+                                    srcset="assets/images/portfolio/freepik__upload__96337-sm.jpg 400w, assets/images/portfolio/freepik__upload__96337-md.jpg 800w, assets/images/portfolio/freepik__upload__96337.jpg 1122w"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 30vw"
+                                    alt="EFEST Electronic Music Festival Poster - Purple Edition with 3D Element"
+                                    loading="lazy"
+                                    decoding="async"
+                                    width="400"
+                                    height="400">
+                            </picture>
+                    <div class="portfolio-overlay">
+                                <h3>EFEST Festival</h3>
+                                <p>Electronic Music Event Branding</p>
+                                <div class="portfolio-tags">
+                                    <span>Event Design</span>
+                                    <span>Music</span>
+                                    <span>3D</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- EFEST Dark Edition & Colorful Circles -->
+                <div class="portfolio-row">
+                    <div class="portfolio-item" data-category="branding 3d">
+                        <div class="portfolio-image square">
+                            <picture>
+                                <source type="image/webp"
+                                    srcset="assets/images/portfolio/freepik__upload__96338-sm.webp 400w, assets/images/portfolio/freepik__upload__96338-md.webp 800w, assets/images/portfolio/freepik__upload__96338.webp 1122w"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 30vw">
+                                <img src="assets/images/portfolio/freepik__upload__96338.jpg"
+                                    srcset="assets/images/portfolio/freepik__upload__96338-sm.jpg 400w, assets/images/portfolio/freepik__upload__96338-md.jpg 800w, assets/images/portfolio/freepik__upload__96338.jpg 1122w"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 30vw"
+                                    alt="EFEST Dark Edition - 3D Neon Electronic Music Festival Poster"
+                                    loading="lazy"
+                                    decoding="async"
+                                    width="400"
+                                    height="400">
+                            </picture>
+                    <div class="portfolio-overlay">
+                                <h3>EFEST Dark Edition</h3>
+                                <p>Neon 3D Event Design</p>
+                                <div class="portfolio-tags">
+                                    <span>3D Design</span>
+                                    <span>Neon</span>
+                                    <span>Event</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item" data-category="digital abstract">
+                        <div class="portfolio-image square">
+                            <picture>
+                                <source type="image/webp"
+                                    srcset="assets/images/portfolio/freepik__upload__96339-sm.webp 400w, assets/images/portfolio/freepik__upload__96339-md.webp 800w, assets/images/portfolio/freepik__upload__96339.webp 1200w"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 30vw">
+                                <img src="assets/images/portfolio/freepik__upload__96339.jpg"
+                                    srcset="assets/images/portfolio/freepik__upload__96339-sm.jpg 400w, assets/images/portfolio/freepik__upload__96339-md.jpg 800w, assets/images/portfolio/freepik__upload__96339.jpg 1200w"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 30vw"
+                                    alt="Colorful Geometric Circles - Abstract Digital Art Composition"
+                                    loading="lazy"
+                                    decoding="async"
+                                    width="400"
+                                    height="400">
+                            </picture>
+                    <div class="portfolio-overlay">
+                                <h3>Color Geometry</h3>
+                                <p>Abstract Circle Composition</p>
+                                <div class="portfolio-tags">
+                                    <span>Abstract</span>
+                                    <span>Geometry</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item" data-category="digital 3d">
+                        <div class="portfolio-image square">
+                            <picture>
+                                <source type="image/webp"
+                                    srcset="assets/images/portfolio/freepik__upload__96340-sm.webp 400w, assets/images/portfolio/freepik__upload__96340-md.webp 800w, assets/images/portfolio/freepik__upload__96340.webp 1200w"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 30vw">
+                                <img src="assets/images/portfolio/freepik__upload__96340.jpg"
+                                    srcset="assets/images/portfolio/freepik__upload__96340-sm.jpg 400w, assets/images/portfolio/freepik__upload__96340-md.jpg 800w, assets/images/portfolio/freepik__upload__96340.jpg 1200w"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 30vw"
+                                    alt="Complex 3D Chrome Installation - Iridescent Digital Art"
+                                    loading="lazy"
+                                    decoding="async"
+                                    width="400"
+                                    height="400">
+                            </picture>
+                    <div class="portfolio-overlay">
+                                <h3>Chrome Installation</h3>
+                                <p>Complex 3D Composition</p>
+                                <div class="portfolio-tags">
+                                    <span>3D Art</span>
+                                    <span>Installation</span>
+                                    <span>Chrome</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="digital">
+                <div class="portfolio-image square">
+                    <div class="portfolio-placeholder">Commercial</div>
+                </div>
+                <div class="portfolio-info">
+                    <h3 class="portfolio-title">Digital Art Collection</h3>
+                    <p class="portfolio-category">Digital Art</p>
+                </div>
+            </div>
+            <div class="portfolio-item large" data-category="branding">
+                <div class="portfolio-image large">
+                    <div class="portfolio-placeholder">Lifestyle</div>
+                </div>
+                <div class="portfolio-info">
+                    <h3 class="portfolio-title">Creative Campaigns</h3>
+                    <p class="portfolio-category">Campaign Design</p>
+                </div>
+            </div>
+        </div>
+        <div class="portfolio-item">
+            <div class="portfolio-image">
+                <div class="portfolio-placeholder">
+                    <i class="fas fa-book"></i>
+                </div>
+            </div>
+            <div class="portfolio-info">
+                <h3 class="portfolio-title">Editorial Layout</h3>
+                <p class="portfolio-category">Print Design</p>
+            </div>
+        </div>
+
+        <!-- New Portfolio Works Row -->
+        <div class="portfolio-row">
+            <div class="portfolio-item large" data-category="branding">
+                <div class="portfolio-image large">
+                    <picture>
+                        <source type="image/webp"
+                            srcset="assets/images/portfolio/freepik__subtle-variation-of-the-previous-electronic-music-__38650-sm.webp 400w, assets/images/portfolio/freepik__subtle-variation-of-the-previous-electronic-music-__38650-md.webp 800w, assets/images/portfolio/freepik__subtle-variation-of-the-previous-electronic-music-__38650.webp 896w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw">
+                        <img src="assets/images/portfolio/freepik__subtle-variation-of-the-previous-electronic-music-__38650.jpg"
+                            srcset="assets/images/portfolio/freepik__subtle-variation-of-the-previous-electronic-music-__38650-sm.jpg 400w, assets/images/portfolio/freepik__subtle-variation-of-the-previous-electronic-music-__38650-md.jpg 800w, assets/images/portfolio/freepik__subtle-variation-of-the-previous-electronic-music-__38650.jpg 896w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw"
+                            alt="Music Festival Poster Collection - Typography and Visual Identity Design"
+                            loading="lazy"
+                            width="896"
+                            height="1280">
+                    </picture>
+                    <div class="portfolio-overlay">
+                        <h3>Music Festival Collection</h3>
+                        <p>Visual Identity & Typography</p>
+                        <div class="portfolio-tags">
+                            <span>Branding</span>
+                            <span>Typography</span>
+                            <span>Event Design</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="digital">
+                <div class="portfolio-image square">
+                    <picture>
+                        <source type="image/webp"
+                            srcset="assets/images/portfolio/freepik__upload__96340-sm.webp 400w, assets/images/portfolio/freepik__upload__96340-md.webp 800w, assets/images/portfolio/freepik__upload__96340.webp 1200w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 30vw">
+                        <img src="assets/images/portfolio/freepik__upload__96340.jpg"
+                            srcset="assets/images/portfolio/freepik__upload__96340-sm.jpg 400w, assets/images/portfolio/freepik__upload__96340-md.jpg 800w, assets/images/portfolio/freepik__upload__96340.jpg 1200w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 30vw"
+                            alt="3D Abstract Composition - Modern Digital Art"
+                            loading="lazy"
+                            decoding="async"
+                            width="1200"
+                            height="1200">
+                    </picture>
+                    <div class="portfolio-overlay">
+                        <h3>Abstract 3D Art</h3>
+                        <p>Modern Digital Composition</p>
+                        <div class="portfolio-tags">
+                            <span>3D Design</span>
+                            <span>Digital Art</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="digital">
+                <div class="portfolio-image square">
+                    <picture>
+                        <source type="image/webp"
+                            srcset="assets/images/portfolio/freepik__upload__96336-sm.webp 400w, assets/images/portfolio/freepik__upload__96336-md.webp 800w, assets/images/portfolio/freepik__upload__96336.webp 1200w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 30vw">
+                        <img src="assets/images/portfolio/freepik__upload__96336.jpg"
+                            srcset="assets/images/portfolio/freepik__upload__96336-sm.jpg 400w, assets/images/portfolio/freepik__upload__96336-md.jpg 800w, assets/images/portfolio/freepik__upload__96336.jpg 1200w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 30vw"
+                            alt="3D Glass Spheres - Purple Gradient Abstract Composition"
+                            loading="lazy"
+                            decoding="async"
+                            width="1333"
+                            height="2000">
+                    </picture>
+                    <div class="portfolio-overlay">
+                        <h3>Glass Spheres</h3>
+                        <p>3D Abstract Composition</p>
+                        <div class="portfolio-tags">
+                            <span>3D Modeling</span>
+                            <span>Abstract</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="portfolio-row">
+            <div class="portfolio-item" data-category="branding">
+                <div class="portfolio-image square">
+                    <picture>
+                        <source type="image/webp"
+                            srcset="assets/images/portfolio/freepik__upload__96337-sm.webp 400w, assets/images/portfolio/freepik__upload__96337-md.webp 800w, assets/images/portfolio/freepik__upload__96337.webp 1122w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 30vw">
+                        <img src="assets/images/portfolio/freepik__upload__96337.jpg"
+                            srcset="assets/images/portfolio/freepik__upload__96337-sm.jpg 400w, assets/images/portfolio/freepik__upload__96337-md.jpg 800w, assets/images/portfolio/freepik__upload__96337.jpg 1122w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 30vw"
+                            alt="EFEST Electronic Music Festival Poster Design"
+                            loading="lazy"
+                            decoding="async"
+                            width="1122"
+                            height="2000">
+                    </picture>
+                    <div class="portfolio-overlay">
+                        <h3>EFEST Festival</h3>
+                        <p>Electronic Music Poster</p>
+                        <div class="portfolio-tags">
+                            <span>Poster Design</span>
+                            <span>Music</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="branding">
+                <div class="portfolio-image square">
+                    <picture>
+                        <source type="image/webp"
+                            srcset="assets/images/portfolio/freepik__upload__96338-sm.webp 400w, assets/images/portfolio/freepik__upload__96338-md.webp 800w, assets/images/portfolio/freepik__upload__96338.webp 1122w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 30vw">
+                        <img src="assets/images/portfolio/freepik__upload__96338.jpg"
+                            srcset="assets/images/portfolio/freepik__upload__96338-sm.jpg 400w, assets/images/portfolio/freepik__upload__96338-md.jpg 800w, assets/images/portfolio/freepik__upload__96338.jpg 1122w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 30vw"
+                            alt="EFEST Electronic Music Festival Dark Theme Poster"
+                            loading="lazy"
+                            decoding="async"
+                            width="1122"
+                            height="2000">
+                    </picture>
+                    <div class="portfolio-overlay">
+                        <h3>EFEST Dark Edition</h3>
+                        <p>Event Branding</p>
+                        <div class="portfolio-tags">
+                            <span>Event Design</span>
+                            <span>Dark Theme</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-item large" data-category="print">
+                <div class="portfolio-image large">
+                    <picture>
+                        <source type="image/webp"
+                            srcset="assets/images/portfolio/freepik__upload__96339-sm.webp 400w, assets/images/portfolio/freepik__upload__96339-md.webp 800w, assets/images/portfolio/freepik__upload__96339.webp 1200w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw">
+                        <img src="assets/images/portfolio/freepik__upload__96339.jpg"
+                            srcset="assets/images/portfolio/freepik__upload__96339-sm.jpg 400w, assets/images/portfolio/freepik__upload__96339-md.jpg 800w, assets/images/portfolio/freepik__upload__96339.jpg 1200w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw"
+                            alt="Creative CV/Resume Design - Modern Layout and Typography"
+                            loading="lazy"
+                            width="2000"
+                            height="2000">
+                    </picture>
+                    <div class="portfolio-overlay">
+                        <h3>Creative CV Design</h3>
+                        <p>Personal Branding & Layout</p>
+                        <div class="portfolio-tags">
+                            <span>CV Design</span>
+                            <span>Layout</span>
+                            <span>Personal Branding</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="portfolio-row">
+            <div class="portfolio-item" data-category="digital">
+                <div class="portfolio-image square">
+                    <picture>
+                        <source type="image/webp"
+                            srcset="assets/images/portfolio/freepik__upload__96340-sm.webp 400w, assets/images/portfolio/freepik__upload__96340-md.webp 800w, assets/images/portfolio/freepik__upload__96340.webp 1200w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 30vw">
+                        <img src="assets/images/portfolio/freepik__upload__96340.jpg"
+                            srcset="assets/images/portfolio/freepik__upload__96340-sm.jpg 400w, assets/images/portfolio/freepik__upload__96340-md.jpg 800w, assets/images/portfolio/freepik__upload__96340.jpg 1200w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 30vw"
+                            alt="Holographic Faces - Iridescent 3D Digital Art"
+                            loading="lazy"
+                            width="2000"
+                            height="2000">
+                    </picture>
+                    <div class="portfolio-overlay">
+                        <h3>Holographic Faces</h3>
+                        <p>Iridescent 3D Art</p>
+                        <div class="portfolio-tags">
+                            <span>3D Art</span>
+                            <span>Holographic</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="digital">
+                <div class="portfolio-image square">
+                    <picture>
+                        <source type="image/webp"
+                            srcset="assets/images/portfolio/freepik__upload__96341-sm.webp 400w, assets/images/portfolio/freepik__upload__96341-md.webp 800w, assets/images/portfolio/freepik__upload__96341.webp 1200w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 30vw">
+                        <img src="assets/images/portfolio/freepik__upload__96341.jpg"
+                            srcset="assets/images/portfolio/freepik__upload__96341-sm.jpg 400w, assets/images/portfolio/freepik__upload__96341-md.jpg 800w, assets/images/portfolio/freepik__upload__96341.jpg 1200w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 30vw"
+                            alt="Colorful Abstract Circles - Vibrant Digital Composition"
+                            loading="lazy"
+                            width="1500"
+                            height="2000">
+                    </picture>
+                    <div class="portfolio-overlay">
+                        <h3>Vibrant Circles</h3>
+                        <p>Abstract Digital Design</p>
+                        <div class="portfolio-tags">
+                            <span>Abstract</span>
+                            <span>Digital</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="digital">
+                <div class="portfolio-image square">
+                    <picture>
+                        <source type="image/webp"
+                            srcset="assets/images/portfolio/freepik__upload__96342-sm.webp 400w, assets/images/portfolio/freepik__upload__96342-md.webp 800w, assets/images/portfolio/freepik__upload__96342.webp 1200w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 30vw">
+                        <img src="assets/images/portfolio/freepik__upload__96342.jpg"
+                            srcset="assets/images/portfolio/freepik__upload__96342-sm.jpg 400w, assets/images/portfolio/freepik__upload__96342-md.jpg 800w, assets/images/portfolio/freepik__upload__96342.jpg 1200w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 30vw"
+                            alt="Smoke Abstract Art - Fluid Dynamic Composition"
+                            loading="lazy"
+                            width="1454"
+                            height="2000">
+                    </picture>
+                    <div class="portfolio-overlay">
+                        <h3>Smoke Dynamics</h3>
+                        <p>Fluid Abstract Art</p>
+                        <div class="portfolio-tags">
+                            <span>Abstract</span>
+                            <span>Fluid Design</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="portfolio-row">
+            <div class="portfolio-item large" data-category="digital">
+                <div class="portfolio-image large">
+                    <picture>
+                        <source type="image/webp"
+                            srcset="assets/images/portfolio/3d-composition-sm.webp 400w, assets/images/portfolio/3d-composition-md.webp 800w, assets/images/portfolio/3d-composition.webp 1200w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw">
+                        <img src="assets/images/portfolio/3d-composition.jpg"
+                            srcset="assets/images/portfolio/3d-composition-sm.jpg 400w, assets/images/portfolio/3d-composition-md.jpg 800w, assets/images/portfolio/3d-composition.jpg 1200w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw"
+                            alt="Complex 3D Composition - Modern Digital Art Installation"
+                            loading="lazy"
+                            width="2000"
+                            height="2000">
+                    </picture>
+                    <div class="portfolio-overlay">
+                        <h3>3D Installation</h3>
+                        <p>Complex Digital Composition</p>
+                        <div class="portfolio-tags">
+                            <span>3D Design</span>
+                            <span>Installation</span>
+                            <span>Modern Art</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Portfolio Row -->
+        <div class="portfolio-row">
+            <div class="portfolio-item large" data-category="video">
+                <div class="portfolio-image large video-portfolio-item"
+                    data-video="assets/videos/freepik__video-generator__49624.mp4">
+                    <div class="video-preview">
+                        <video class="portfolio-video" muted preload="metadata">
+                            <source src="assets/videos/freepik__video-generator__49624.mp4" type="video/mp4" aria-label="Motion graphics preview">
+                            <track kind="captions" src="assets/videos/captions-en.vtt" srclang="en" label="English">
+                            <track kind="descriptions" src="assets/videos/descriptions-en.vtt" srclang="en" label="English descriptions">
+                        </video>
+                        <div class="video-overlay">
+                            <div class="play-button">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-info">
+                    <h3 class="portfolio-title">Motion Graphics Showcase</h3>
+                    <p class="portfolio-category">Video & Motion</p>
+                </div>
+            </div>
+
+            <div class="portfolio-item" data-category="video">
+                <div class="portfolio-image square video-portfolio-item"
+                    data-video="assets/videos/freepik__video-generator__49624.mp4">
+                    <div class="video-preview">
+                        <video class="portfolio-video" muted preload="metadata">
+                            <source src="assets/videos/freepik__video-generator__49624.mp4" type="video/mp4" aria-label="Brand animation preview">
+                            <track kind="captions" src="assets/videos/captions-en.vtt" srclang="en" label="English">
+                            <track kind="descriptions" src="assets/videos/descriptions-en.vtt" srclang="en" label="English descriptions">
+                        </video>
+                        <div class="video-overlay">
+                            <div class="play-button">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-info">
+                    <h3 class="portfolio-title">Brand Animation</h3>
+                    <p class="portfolio-category">Video & Motion</p>
+                </div>
+            </div>
+
+            <div class="portfolio-item" data-category="video">
+                <div class="portfolio-image square video-portfolio-item"
+                    data-video="assets/videos/freepik__video-generator__49624.mp4">
+                    <div class="video-preview">
+                        <video class="portfolio-video" muted preload="metadata">
+                            <source src="assets/videos/freepik__video-generator__49624.mp4" type="video/mp4" aria-label="Creative transitions preview">
+                            <track kind="captions" src="assets/videos/captions-en.vtt" srclang="en" label="English">
+                            <track kind="descriptions" src="assets/videos/descriptions-en.vtt" srclang="en" label="English descriptions">
+                        </video>
+                        <div class="video-overlay">
+                            <div class="play-button">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-info">
+                    <h3 class="portfolio-title">Creative Transitions</h3>
+                    <p class="portfolio-category">Video & Motion</p>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Services</h2>
+                <p class="section-subtitle">Professional modeling services I offer</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3 class="service-title">Brand Identity</h3>
+                    <p class="service-description">
+                        Creating unique brand identities, logos, and visual systems that capture the essence of your
+                        business.
+                    </p>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3 class="service-title">Print & Editorial</h3>
+                    <p class="service-description">
+                        Designing magazines, posters, and editorial layouts that combine striking visuals with clear
+                        communication.
+                    </p>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3 class="service-title">Creative Direction</h3>
+                    <p class="service-description">
+                        Experimental design concepts, art direction, and innovative visual solutions for
+                        forward-thinking projects.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-text">
+                    <h2 class="section-title">Let's Create Together</h2>
+                    <p class="contact-description">
+                        Ready for your next photoshoot or campaign? I'd love to collaborate
+                        and bring your creative vision to life through professional modeling.
+                    </p>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <span class="contact-label">Email</span>
+                            <a href="mailto:magic4jellyfish@gmail.com"
+                                class="contact-value">magic4jellyfish@gmail.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-label">Phone</span>
+                            <span class="contact-value">+420 776 829 718</span>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="TikTok">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <!--
+                    НАСТРОЙКА ОТПРАВКИ ПИСЕМ:
+
+                    Вариант 1 - EmailJS (рекомендуется):
+                    Замените значения на ваши:
+                    - data-service-id="ваш_service_id"
+                    - data-template-id="ваш_template_id"
+                    - data-public-key="ваш_public_key"
+
+                    Вариант 2 - Formspree (проще):
+                    Добавьте перед </body>:
+                    <script>window.FORMSPREE_ID = 'ваш_form_id';</script>
+                    Или добавьте data-formspree-id="ваш_form_id" в форму
+
+                    Вариант 3 - Mailto (fallback):
+                    Автоматически используется, если EmailJS и Formspree не настроены
+
+                    Подробная инструкция: см. EMAIL_SETUP.md
+                    -->
+                    <form class="form" id="contact-form"
+                          data-service-id="service_contact"
+                          data-template-id="template_contact"
+                          data-public-key="">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" id="name" name="name" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="email" name="email" placeholder="Your Email" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" placeholder="Tell me about your project..."
+                                required rows="5"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scroll Indicators -->
+    <div class="scroll-indicator">
+        <div class="scroll-dot active" data-section="hero"></div>
+        <div class="scroll-dot" data-section="portfolio"></div>
+        <div class="scroll-dot" data-section="services"></div>
+        <div class="scroll-dot" data-section="contact"></div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="back-to-top" aria-label="Вернуться наверх">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Footer -->
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-text">&copy; 2025 Elizaveta Vakalova. Designed with care.</p>
+                <div class="footer-links">
+                    <a href="#home">Back to top</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Enhanced Scripts -->
+    <!-- EmailJS для отправки писем -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3.11.0/dist/email.min.js"></script>
+
+    <!--
+    НАСТРОЙКА ОТПРАВКИ ПИСЕМ - Раскомментируйте один из вариантов:
+
+    Вариант 1 - EmailJS (нужен Public Key):
+    <script>
+      window.EMAILJS_PUBLIC_KEY = 'ваш_public_key_от_emailjs';
+    </script>
+
+    Вариант 2 - Formspree (проще, без EmailJS):
+    <script>
+      window.FORMSPREE_ID = 'ваш_form_id_от_formspree';
+    </script>
+
+    Если ничего не настроено, будет использован mailto (открытие почтового клиента)
+    Подробная инструкция: см. EMAIL_SETUP.md
+    -->
+
+    <!-- Browser Compatible Modules (No ES6 imports) -->
+    <script src="modules/gallery-browser.js"></script>
+    <script src="modules/forms-browser.js"></script>
+    <script src="main-browser.js"></script>
+
+    <!-- Health Check для диагностики -->
+    <script src="health-check.js"></script>
+
+    <!-- Progressive Enhancement Script -->
+    <script>
+        // Fallback для старых браузеров
+        if (!window.Promise || !window.fetch || !window.IntersectionObserver) {
+            console.warn('⚠️ Browser compatibility issues detected. Some features may not work.');
+
+            // Загружаем полифиллы
+            const polyfillScript = document.createElement('script');
+            polyfillScript.src = 'https://polyfill.io/v3/polyfill.min.js?features=Promise,fetch,IntersectionObserver';
+            document.head.appendChild(polyfillScript);
+        }
+
+        // Fallback: принудительно скрываем прелоадер через 5 секунд
+        setTimeout(function() {
+            const preloader = document.getElementById('preloader');
+            if (preloader && preloader.style.display !== 'none') {
+                console.warn('⚠️ Preloader timeout - hiding manually');
+                preloader.style.transition = 'opacity 0.5s ease-out';
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500);
+            }
+        }, 5000);
+
+        // Инициализация приложения
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('🚀 Portfolio application starting...');
+
+            // Проверяем производительность устройства
+            const isLowEndDevice = navigator.hardwareConcurrency < 4 ||
+                navigator.deviceMemory < 4 ||
+                /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+            if (isLowEndDevice) {
+                document.body.classList.add('low-end-device');
+                console.log('📱 Low-end device detected, optimizing experience...');
+            }
+
+            // Отслеживание ошибок
+            window.addEventListener('error', function (e) {
+                console.error('💥 Global error:', e.error);
+
+                // Можно отправлять на сервер аналитики
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'exception', {
+                        'description': e.error.toString(),
+                        'fatal': false
+                    });
+                }
+            });
+        });
+
+        // Показываем прогресс загрузки
+        let loadedModules = 0;
+        const totalModules = 5; // animations, gallery, forms, performance, media
+
+        window.moduleLoadProgress = function (moduleName) {
+            loadedModules++;
+            const progress = (loadedModules / totalModules) * 100;
+
+            console.log(`📦 Module ${moduleName} loaded (${progress.toFixed(0)}%)`);
+
+            if (loadedModules === totalModules) {
+                console.log('🎉 All modules loaded successfully!');
+                document.body.classList.add('modules-loaded');
+
+                // Скрываем прелоадер
+                setTimeout(() => {
+                    const preloader = document.getElementById('preloader');
+                    if (preloader) {
+                        const progressBar = preloader.querySelector('#preloader-bar');
+                        if (progressBar) {
+                            progressBar.style.width = '100%';
+                        }
+                        preloader.style.transition = 'opacity 0.5s ease-out';
+                        preloader.style.opacity = '0';
+                        setTimeout(() => {
+                            preloader.style.display = 'none';
+                        }, 500);
+                    }
+                }, 300);
+
+                // Запускаем финальные инициализации
+                setTimeout(() => {
+                    if (window.AnimationModule && window.AnimationModule.isInitialized) {
+                        console.log('🎬 Starting entrance animations...');
+                    }
+                }, 100);
+            }
+        };
+
+        // Intersection Observer для ленивой загрузки изображений
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+
+                        // Заменяем data-src на src для ленивой загрузки
+                        if (img.dataset.src) {
+                            img.src = img.dataset.src;
+                            img.removeAttribute('data-src');
+                        }
+
+                        img.classList.add('loaded');
+                        observer.unobserve(img);
+                    }
+                });
+            }, {
+                rootMargin: '50px 0px',
+                threshold: 0.01
+            });
+
+            // Наблюдаем за изображениями с loading="lazy"
+            const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+            console.log(`📷 Found ${lazyImages.length} lazy-loaded images`);
+
+            lazyImages.forEach(img => {
+                // Добавляем обработчик ошибок
+                img.addEventListener('error', () => {
+                    console.warn('⚠️ Failed to load lazy image:', img.src);
+                    img.classList.add('error');
+                });
+
+                imageObserver.observe(img);
+            });
+        }
+
+        // Оптимизация: убираем loading="lazy" с изображений в viewport
+        // Используем requestIdleCallback для неблокирующего выполнения
+        const optimizeLazyImages = () => {
+            const viewportHeight = window.innerHeight;
+            const lazyImagesInViewport = document.querySelectorAll('img[loading="lazy"]');
+
+            lazyImagesInViewport.forEach(img => {
+                const rect = img.getBoundingClientRect();
+                if (rect.top < viewportHeight && rect.bottom > 0) {
+                    img.removeAttribute('loading');
+                }
+            });
+        };
+
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(optimizeLazyImages, { timeout: 2000 });
+        } else {
+            setTimeout(optimizeLazyImages, 100);
+        }
+
+        // Отслеживание загрузки критических изображений
+        const criticalImages = document.querySelectorAll('img[fetchpriority="high"]');
+        let loadedCritical = 0;
+
+        criticalImages.forEach(img => {
+            if (img.complete) {
+                loadedCritical++;
+            } else {
+                img.addEventListener('load', () => {
+                    loadedCritical++;
+                    if (loadedCritical === criticalImages.length) {
+                        console.log('🖼️ All critical images loaded');
+                        document.dispatchEvent(new CustomEvent('criticalImagesLoaded'));
+                    }
+                });
+
+                img.addEventListener('error', () => {
+                    console.warn('⚠️ Critical image failed to load:', img.src);
+                    // Fallback для критических изображений
+                    img.style.background = 'linear-gradient(135deg, #f0f0f0, #e0e0e0)';
+                });
+            }
+        });
+
+            if (loadedCritical === criticalImages.length) {
+                requestAnimationFrame(() => {
+                    document.dispatchEvent(new CustomEvent('criticalImagesLoaded'));
+                });
+            }
+    </script>
+</body>
+
+</html>

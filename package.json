@@ -1,0 +1,55 @@
+{
+  "name": "elizaveta-portfolio",
+  "version": "1.0.0",
+  "description": "Professional portfolio website for Elizaveta - Designer & Digital Artist",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "fix": "npm run fix:js && npm run fix:css",
+    "fix:js": "eslint --fix .",
+    "fix:css": "stylelint --fix **/*.css",
+    "fix:auto": "node scripts/fix-linting-errors.js",
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview --host",
+    "serve": "node server.js",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:debug": "playwright test --debug",
+    "lighthouse": "npx lighthouse http://localhost:3000 --output-path=./reports/lighthouse-report.html --view",
+    "analyze": "npm run build && npx vite-bundle-analyzer dist/stats.json",
+    "lint": "eslint . --ext .js,.ts,.jsx,.tsx --fix",
+    "lint:css": "stylelint css/**/*.css --fix",
+    "format": "prettier --write .",
+    "audit": "pwsh -ExecutionPolicy Bypass -File audit.ps1",
+    "optimize": "npm run lint && npm run format && npm run build && npm run analyze"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "@vitejs/plugin-legacy": "^7.2.1",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^8.55.0",
+    "prettier": "^3.1.0",
+    "sharp": "^0.34.4",
+    "stylelint": "^15.11.0",
+    "stylelint-config-standard": "^34.0.0",
+    "terser": "^5.24.0",
+    "vite": "^7.1.7",
+    "vite-bundle-analyzer": "^0.7.0",
+    "vite-plugin-pwa": "^1.0.3",
+    "workbox-window": "^7.0.0"
+  },
+  "dependencies": {
+    "core-js": "^3.33.0",
+    "express": "^5.1.0",
+    "intersection-observer": "^0.12.2"
+  },
+  "keywords": [
+    "portfolio",
+    "design",
+    "art",
+    "web"
+  ],
+  "author": "Elizaveta",
+  "license": "MIT"
+}
