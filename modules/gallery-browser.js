@@ -243,6 +243,23 @@
           img.classList.add('loaded')
         })
       }
+
+      // Добавляем обработчик для всех lazy-loaded изображений (включая те, что используют обычный src)
+      const allLazyImages = document.querySelectorAll('img[loading="lazy"]')
+      allLazyImages.forEach(img => {
+        if (img.complete) {
+          // Изображение уже загружено
+          img.classList.add('loaded')
+        } else {
+          // Ждем загрузки
+          img.addEventListener('load', () => {
+            img.classList.add('loaded')
+          })
+          img.addEventListener('error', () => {
+            img.classList.add('error')
+          })
+        }
+      })
     }
 
     initLightbox() {
