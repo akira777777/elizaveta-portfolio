@@ -80,6 +80,16 @@
       this.loadStartTime = performance.now();
       this.isInitialized = false;
       this.readyCallbacks = [];
+      // Кеширование DOM элементов
+      this.cachedElements = {
+        hamburger: null,
+        navMenu: null,
+        navbar: null,
+        themeToggle: null,
+        scrollProgress: null,
+        scrollProgressBar: null,
+        backToTopBtn: null
+      };
 
       this.init();
     }
@@ -118,6 +128,9 @@
     }
 
     initBasicFeatures() {
+      // Кешируем часто используемые элементы
+      this.cacheElements();
+
       // Smooth scroll для ссылок
       this.initSmoothScroll();
 
@@ -135,6 +148,16 @@
 
       // Scroll progress bar
       this.initScrollProgress();
+    }
+
+    cacheElements() {
+      this.cachedElements.hamburger = document.querySelector('.hamburger');
+      this.cachedElements.navMenu = document.querySelector('.nav-menu');
+      this.cachedElements.navbar = document.querySelector('.navbar');
+      this.cachedElements.themeToggle = document.getElementById('theme-toggle');
+      this.cachedElements.scrollProgress = document.getElementById('scroll-progress');
+      this.cachedElements.scrollProgressBar = document.getElementById('scroll-progress-bar');
+      this.cachedElements.backToTopBtn = document.getElementById('back-to-top');
     }
 
     initSmoothScroll() {
@@ -159,9 +182,9 @@
     }
 
     initMobileMenu() {
-      const hamburger = document.querySelector('.hamburger');
-      const navMenu = document.querySelector('.nav-menu');
-      const navbar = document.querySelector('.navbar');
+      const hamburger = this.cachedElements.hamburger;
+      const navMenu = this.cachedElements.navMenu;
+      const navbar = this.cachedElements.navbar;
 
       if (hamburger && navMenu) {
         hamburger.addEventListener('click', () => {
@@ -170,8 +193,8 @@
           document.body.classList.toggle('menu-open');
         });
 
-        // Закрытие меню при клике вне его
-        document.addEventListener('click', e => {
+        // Закрытие меню при клике вне его (с делегированием)
+        document.addEventListener('click', (e) => {
           if (
             navbar &&
             !navbar.contains(e.target) &&
@@ -183,39 +206,45 @@
           }
         });
 
-        // Закрытие меню при клике на ссылку
-        const menuLinks = navMenu.querySelectorAll('a');
-        menuLinks.forEach(link => {
-          link.addEventListener('click', () => {
+        // Закрытие меню при клике на ссылку (с делегированием)
+        navMenu.addEventListener('click', (e) => {
+          const link = e.target.closest('a');
+          if (link) {
             navMenu.classList.remove('active');
             hamburger.classList.remove('active');
             document.body.classList.remove('menu-open');
-          });
+          }
         });
       }
     }
 
     initLazyLoading() {
-      // Обработка изображений с loading="lazy"
-      const lazyImages = document.querySelectorAll('img[loading="lazy"]');
-
+      // Используем один IntersectionObserver для всех изображений
       if ('IntersectionObserver' in window) {
         const imageObserver = new IntersectionObserver(
           (entries, observer) => {
             entries.forEach(entry => {
               if (entry.isIntersecting) {
                 const img = entry.target;
-                // Убеждаемся, что изображение загружено
-                if (!img.complete) {
-                  img.addEventListener('load', () => {
-                    img.classList.add('loaded');
-                  });
-                  img.addEventListener('error', () => {
-                    this.handleImageError(img);
-                  });
+
+                // Обработка data-src
+                const dataSrc = img.dataset.src;
+                if (dataSrc) {
+                  this.loadImage(img);
                 } else {
-                  img.classList.add('loaded');
+                  // Обработка loading="lazy"
+                  if (!img.complete) {
+                    img.addEventListener('load', () => {
+                      img.classList.add('loaded');
+                    }, { once: true });
+                    img.addEventListener('error', () => {
+                      this.handleImageError(img);
+                    }, { once: true });
+                  } else {
+                    img.classList.add('loaded');
+                  }
                 }
+
                 observer.unobserve(img);
               }
             });
@@ -225,44 +254,22 @@
           }
         );
 
-        lazyImages.forEach(img => imageObserver.observe(img));
+        // Наблюдаем за всеми изображениями с loading="lazy" или data-src
+        const lazyImages = document.querySelectorAll('img[loading="lazy"], img[data-src]');
+        lazyImages.forEach(img => {
+          if (!img.hasAttribute('data-error-handled')) {
+            img.setAttribute('data-error-handled', 'true');
+            img.addEventListener('error', () => {
+              this.handleImageError(img);
+            }, { once: true });
+          }
+          imageObserver.observe(img);
+        });
+      } else {
+        // Fallback для старых браузеров
+        const dataSrcImages = document.querySelectorAll('img[data-src]');
+        dataSrcImages.forEach(img => this.loadImage(img));
       }
-
-      // Обработка изображений с data-src
-      const dataSrcImages = document.querySelectorAll('img[data-src]');
-      if (dataSrcImages.length > 0) {
-        if ('IntersectionObserver' in window) {
-          const dataSrcObserver = new IntersectionObserver(
-            (entries, observer) => {
-              entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                  const img = entry.target;
-                  this.loadImage(img);
-                  observer.unobserve(img);
-                }
-              });
-            },
-            {
-              rootMargin: '50px 0px'
-            }
-          );
-
-          dataSrcImages.forEach(img => dataSrcObserver.observe(img));
-        } else {
-          // Fallback для старых браузеров
-          dataSrcImages.forEach(img => this.loadImage(img));
-        }
-      }
-
-      // Обработка ошибок загрузки всех изображений
-      document.querySelectorAll('img').forEach(img => {
-        if (!img.hasAttribute('data-error-handled')) {
-          img.setAttribute('data-error-handled', 'true');
-          img.addEventListener('error', () => {
-            this.handleImageError(img);
-          });
-        }
-      });
     }
 
     loadImage(img) {
@@ -275,15 +282,36 @@
     }
 
     handleImageError(img) {
-      console.warn('Image failed to load:', img.src || img.getAttribute('data-src'));
+      const src = img.src || img.getAttribute('data-src');
+      console.warn('⚠️ Image failed to load:', src);
+
       img.classList.add('error');
       img.classList.add('loaded'); // Чтобы убрать placeholder
 
-      // Можно добавить fallback изображение
+      // Добавляем fallback изображение или placeholder
       if (!img.hasAttribute('data-fallback-set')) {
         img.setAttribute('data-fallback-set', 'true');
+
+        // Создаем SVG placeholder
+        const placeholder = `data:image/svg+xml,${encodeURIComponent(`
+          <svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+            <rect width="400" height="300" fill="#f0f0f0"/>
+            <text x="50%" y="50%" text-anchor="middle" dy=".3em" font-family="Arial" font-size="16" fill="#999">
+              Image not available
+            </text>
+          </svg>
+        `)}`;
+
+        // Пробуем использовать placeholder, если оригинал не загрузился
+        if (!img.src || img.src === src) {
+          img.src = placeholder;
+        }
+
         img.style.backgroundColor = '#f0f0f0';
         img.alt = img.alt || 'Image not available';
+
+        // Добавляем визуальный индикатор ошибки
+        img.style.border = '2px dashed #ccc';
       }
     }
 
@@ -544,10 +572,9 @@
     }
 
     setupScrollToTop() {
-      // Проверяем существующую кнопку back-to-top
-      const backToTopBtn = document.getElementById('back-to-top');
+      // Используем кешированную кнопку или создаем новую
       const scrollBtn =
-        backToTopBtn || document.querySelector('.scroll-to-top') || this.createScrollToTopBtn();
+        this.cachedElements.backToTopBtn || document.querySelector('.scroll-to-top') || this.createScrollToTopBtn();
 
       // Оптимизируем scroll событие с throttle
       const handleScroll = Utils.throttle(() => {
@@ -582,7 +609,7 @@
     }
 
     initThemeToggle() {
-      const themeToggle = document.getElementById('theme-toggle');
+      const themeToggle = this.cachedElements.themeToggle;
       if (!themeToggle) return;
 
       // Проверяем сохраненную тему
@@ -601,7 +628,7 @@
     }
 
     updateThemeIcon(theme) {
-      const themeToggle = document.getElementById('theme-toggle');
+      const themeToggle = this.cachedElements.themeToggle;
       if (!themeToggle) return;
 
       const icon = themeToggle.querySelector('i');
@@ -611,8 +638,8 @@
     }
 
     initScrollProgress() {
-      const scrollProgress = document.getElementById('scroll-progress');
-      const scrollProgressBar = document.getElementById('scroll-progress-bar');
+      const scrollProgress = this.cachedElements.scrollProgress;
+      const scrollProgressBar = this.cachedElements.scrollProgressBar;
 
       if (!scrollProgress || !scrollProgressBar) return;
 
