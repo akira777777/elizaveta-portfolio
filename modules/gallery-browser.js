@@ -25,7 +25,9 @@
       if (this.isInitialized) return
 
       try {
-        console.log('🖼️ Initializing Portfolio Gallery...')
+        if (typeof process === 'undefined' || process.env.NODE_ENV !== 'production') {
+          console.log('🖼️ Initializing Portfolio Gallery...')
+        }
 
         // Кешируем DOM элементы
         this.cacheElements()
@@ -43,7 +45,9 @@
         this.initVideo()
 
         this.isInitialized = true
-        console.log('✅ Portfolio Gallery initialized')
+        if (typeof process === 'undefined' || process.env.NODE_ENV !== 'production') {
+          console.log('✅ Portfolio Gallery initialized')
+        }
 
         // Уведомляем о загрузке модуля
         if (typeof globalThis.moduleLoadProgress === 'function') {
@@ -228,7 +232,9 @@
           imageObserver.observe(img)
         })
 
-        console.log(`📷 Observing ${portfolioImages.length} lazy images`)
+        if (typeof process === 'undefined' || process.env.NODE_ENV !== 'production') {
+          console.log(`📷 Observing ${portfolioImages.length} lazy images`)
+        }
       } else {
         // Fallback для старых браузеров
         console.warn(
@@ -245,19 +251,24 @@
       }
 
       // Добавляем обработчик для всех lazy-loaded изображений (включая те, что используют обычный src)
-      const allLazyImages = document.querySelectorAll('img[loading="lazy"]')
+      // Используем один обработчик для всех изображений для оптимизации
+      const allLazyImages = document.querySelectorAll('img[loading="lazy"]:not([data-lazy-handled])')
       allLazyImages.forEach(img => {
-        if (img.complete) {
+        img.setAttribute('data-lazy-handled', 'true')
+        if (img.complete && img.naturalWidth > 0) {
           // Изображение уже загружено
           img.classList.add('loaded')
         } else {
-          // Ждем загрузки
-          img.addEventListener('load', () => {
+          // Ждем загрузки - используем once для автоматической очистки
+          const loadHandler = () => {
             img.classList.add('loaded')
-          })
-          img.addEventListener('error', () => {
+          }
+          const errorHandler = () => {
             img.classList.add('error')
-          })
+            img.classList.add('loaded') // Показываем placeholder
+          }
+          img.addEventListener('load', loadHandler, { once: true })
+          img.addEventListener('error', errorHandler, { once: true })
         }
       })
     }

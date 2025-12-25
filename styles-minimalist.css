@@ -95,7 +95,7 @@ a {
   /* Поддержка современного синтаксиса */
   background: rgb(255 255 255 / 95%);
   /* Эффект размытия, где поддерживается */
-  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--color-gray-200);
   transition: var(--transition-base);
@@ -498,8 +498,11 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: var(--transition-base);
+  transition: opacity 0.3s ease-in-out;
   background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+  /* Оптимизация рендеринга */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .portfolio-image img[src=""],
@@ -1427,7 +1430,7 @@ a {
   padding: 20px;
   cursor: pointer;
   transition: var(--transition-base);
-  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
 
@@ -1454,7 +1457,7 @@ a {
   background: rgb(0 0 0 / 50%);
   padding: 8px 16px;
   border-radius: 20px;
-  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
 
@@ -1948,7 +1951,7 @@ textarea.valid {
 .section-header {
   opacity: 0;
   transform: translateY(30px);
-  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .portfolio-image,
@@ -1995,7 +1998,7 @@ textarea.valid {
   pointer-events: none;
   z-index: 9999;
   mix-blend-mode: difference;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
 }
 
 .custom-cursor.hover {
@@ -2095,7 +2098,7 @@ textarea.valid {
   background: rgb(102 126 234 / 30%);
   margin: 10px 0;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background 0.3s ease, transform 0.3s ease;
 }
 
 .scroll-dot.active {
@@ -2160,7 +2163,7 @@ textarea.valid {
   opacity: 0;
   visibility: hidden;
   transform: translateY(20px);
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: opacity 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), visibility 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   box-shadow: 0 4px 15px rgb(102 126 234 / 30%);
 }
 
@@ -2227,12 +2230,15 @@ img[loading='lazy'] {
   /* Плавное появление для lazy-loaded изображений */
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
+  /* Предотвращаем layout shift */
+  content-visibility: auto;
 }
 
 img[loading='lazy'].loaded,
 img[loading='eager'],
 img.loaded {
   opacity: 1 !important;
+  content-visibility: visible;
 }
 
 img.error {

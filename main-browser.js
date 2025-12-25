@@ -255,8 +255,10 @@
         );
 
         // Наблюдаем за всеми изображениями с loading="lazy" или data-src
-        const lazyImages = document.querySelectorAll('img[loading="lazy"], img[data-src]');
+        // Пропускаем изображения, уже обработанные gallery-browser.js
+        const lazyImages = document.querySelectorAll('img[loading="lazy"]:not([data-lazy-handled]), img[data-src]:not([data-lazy-handled])');
         lazyImages.forEach(img => {
+          img.setAttribute('data-lazy-handled', 'true');
           if (!img.hasAttribute('data-error-handled')) {
             img.setAttribute('data-error-handled', 'true');
             img.addEventListener('error', () => {
