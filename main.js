@@ -3,6 +3,7 @@
  * Координирует все модули и обеспечивает быструю загрузку
  */
 
+import { inject } from '@vercel/analytics';
 import { CoreModule } from './modules/core.js';
 import { PerformanceModule } from './modules/performance.js';
 import { MediaModule } from './modules/media-optimized.js';
@@ -22,6 +23,9 @@ class PortfolioApp {
 
   async initApp() {
     try {
+      // Initialize Vercel Web Analytics
+      inject();
+
       // Сначала запускаем Performance Module для мониторинга
       this.performance = new PerformanceModule();
       this.modules.set('performance', this.performance);
