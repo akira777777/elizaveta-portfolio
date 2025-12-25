@@ -37,7 +37,7 @@
 
     <!-- Preload критических ресурсов -->
     <link rel="preload" href="styles-minimalist.css" as="style">
-    <link rel="preload" href="main-browser.js" as="script" crossorigin>
+    <link rel="preload" href="main-browser.js" as="script">
     <link rel="preload" href="assets/images/portfolio/3d-composition.jpg" as="image" fetchpriority="high">
 
     <!-- Оптимизированная загрузка шрифтов с font-display -->
@@ -1116,11 +1116,19 @@
         };
 
         // Intersection Observer для ленивой загрузки изображений
+        // ПРИМЕЧАНИЕ: Основная обработка ленивой загрузки выполняется в main-browser.js
+        // Этот код обрабатывает только изображения, которые еще не были обработаны
         if ('IntersectionObserver' in window) {
             const imageObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const img = entry.target;
+
+                        // Пропускаем изображения, уже обработанные main-browser.js или gallery-browser.js
+                        if (img.hasAttribute('data-lazy-handled')) {
+                            observer.unobserve(img);
+                            return;
+                        }
 
                         // Заменяем data-src на src для ленивой загрузки
                         if (img.dataset.src) {
@@ -1137,19 +1145,17 @@
                 threshold: 0.01
             });
 
-            // Наблюдаем за изображениями с loading="lazy"
-            const lazyImages = document.querySelectorAll('img[loading="lazy"]');
-            console.log(`📷 Found ${lazyImages.length} lazy-loaded images`);
+            // Наблюдаем только за изображениями, которые еще не обработаны
+            const lazyImages = document.querySelectorAll('img[loading="lazy"]:not([data-lazy-handled])');
+            if (lazyImages.length > 0) {
+                console.log(`📷 Found ${lazyImages.length} additional lazy-loaded images`);
 
-            lazyImages.forEach(img => {
-                // Добавляем обработчик ошибок
-                img.addEventListener('error', () => {
-                    console.warn('⚠️ Failed to load lazy image:', img.src);
-                    img.classList.add('error');
+                lazyImages.forEach(img => {
+                    img.setAttribute('data-lazy-handled', 'true');
+                    // Обработчик ошибок будет добавлен в main-browser.js, здесь только наблюдаем
+                    imageObserver.observe(img);
                 });
-
-                imageObserver.observe(img);
-            });
+            }
         }
 
         // Оптимизация: убираем loading="lazy" с изображений в viewport
