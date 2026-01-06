@@ -40,6 +40,7 @@
     "workbox-window": "^7.0.0"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.6.1",
     "core-js": "^3.33.0",
     "express": "^5.1.0",
     "intersection-observer": "^0.12.2"
